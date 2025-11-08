@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
- "scripts": {
+"scripts": {
   "start": "node src/index.js",
   "dev": "nodemon src/index.js",
   "prisma:migrate": "dotenv -e .env -- npx prisma migrate dev",
   "prisma:generate": "dotenv -e .env -- npx prisma generate",
-  "postinstall": "npx prisma generate && npx prisma migrate deploy"
-
+  "postinstall": "npx prisma generate",
+  "db:push:prod": "cross-env DATABASE_URL=\"postgres://14377b5b6bc5e22d05ade293b3caa5fa8398c33a723d7da5e0d60bd40856d60b:sk_TN2Qdh_WmuFQxjP4rXH_P@db.prisma.io:5432/postgres?sslmode=require\" npx prisma migrate deploy"
 },
   "keywords": [],
   "author": "",
@@ -28,6 +28,7 @@
     "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
+    "cross-env": "^10.1.0",
     "dotenv-cli": "^11.0.0",
     "nodemon": "^3.1.10",
     "prisma": "^6.19.0"
