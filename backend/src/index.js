@@ -3,7 +3,9 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
 
 // --- Route Imports ---
 const authRoutes = require('./routes/auth.routes');
@@ -47,6 +49,7 @@ const limiter = rateLimit({
     standardHeaders: true,
     legacyHeaders: false,
     message: 'Too many requests from this IP, please try again after 15 minutes',
+    trustProxy: 1 
 });
 app.use('/api', limiter); // Apply rate limiting to all API routes
 
@@ -75,8 +78,9 @@ app.use('/api/settings', settingsRoutes);
 // --- Global Error Handling ---
 // This MUST be the last middleware in the chain.
 app.use(errorHandler);
-
+/*
 // --- Start the Server ---
 app.listen(PORT, () => {
     console.log(`🚀 Server is running on http://localhost:${PORT}`);
-});
+});  */
+module.exports = app;
