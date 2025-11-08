@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // Create a new instance of axios with a custom configuration
-const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api' ||'https://youware-gold.vercel.app/api';
 
 const apiClient = axios.create({
   baseURL: baseURL,
