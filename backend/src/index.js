@@ -36,7 +36,7 @@ const PORT = process.env.PORT || 5000;
 // Example: app.use(cors({ origin: 'https://yourapp.com' }));
 app.use(cors());
 const allowedOrigins = process.env.NODE_ENV === 'production' 
-    ? 'https://your-frontend-app-url.vercel.app' // <-- REPLACE WITH YOUR FRONTEND URL
+    ? 'https://marvelous-buttercream-4e7da3.netlify.app' // <-- REPLACE WITH YOUR FRONTEND URL
     : 'http://localhost:5173'; // Or whatever your local dev port is
 app.use(cors({ origin: allowedOrigins }));
 
