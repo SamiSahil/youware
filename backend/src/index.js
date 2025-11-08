@@ -41,6 +41,7 @@ app.use(helmet());
 
 // 3. Enable JSON body parsing for incoming requests
 app.use(express.json());
+app.set('trust proxy', 1); 
 
 // 4. Rate limiting to prevent brute-force and DDoS attacks
 const limiter = rateLimit({
@@ -49,7 +50,6 @@ const limiter = rateLimit({
     standardHeaders: true,
     legacyHeaders: false,
     message: 'Too many requests from this IP, please try again after 15 minutes',
-    trustProxy: 1 
 });
 app.use('/api', limiter); // Apply rate limiting to all API routes
 
