@@ -1,7 +1,8 @@
 // backend/src/utils/prisma.js
 
 const { PrismaClient } = require('@prisma/client');
-const { withAccelerate } = require('@prisma/client/extension-accelerate');
+// THIS IS THE CORRECT IMPORT PATH
+const { withAccelerate } = require('@prisma/extension-accelerate');
 
 // Use a single instance of Prisma Client
 let prisma;
