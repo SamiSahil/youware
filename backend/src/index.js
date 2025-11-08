@@ -53,7 +53,7 @@ app.use('/api', limiter); // Apply rate limiting to all API routes
 // --- API Routes Mounting ---
 
 // Health check endpoint
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.send('EduVersePro API is healthy and running!');
 });
 
