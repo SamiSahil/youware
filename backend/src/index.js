@@ -35,6 +35,10 @@ const PORT = process.env.PORT || 5000;
 // In production, you should restrict this to your frontend's domain for security.
 // Example: app.use(cors({ origin: 'https://yourapp.com' }));
 app.use(cors());
+const allowedOrigins = process.env.NODE_ENV === 'production' 
+    ? 'https://your-frontend-app-url.vercel.app' // <-- REPLACE WITH YOUR FRONTEND URL
+    : 'http://localhost:5173'; // Or whatever your local dev port is
+app.use(cors({ origin: allowedOrigins }));
 
 // 2. Set security-related HTTP headers
 app.use(helmet());
