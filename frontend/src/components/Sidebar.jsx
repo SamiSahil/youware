@@ -5,6 +5,7 @@ import {
   LayoutDashboard,
   Users,
   GraduationCap,
+  Briefcase,
   BookOpen,
   FileText,
   Calendar,
@@ -37,6 +38,7 @@ const Sidebar = ({ isOpen, onClose }) => {
   const menuItems = {
     admin: [
       { title: 'Dashboard', icon: LayoutDashboard, path: '/admin/dashboard' },
+      { title: 'Manage Staff', icon: Briefcase, path: '/admin/staff' },
       { title: 'Manage Teachers', icon: GraduationCap, path: '/admin/teachers' },
       { title: 'Manage Students', icon: Users, path: '/admin/students' },
       { title: 'Academic Structure', icon: Network, path: '/admin/academic-structure' },
@@ -87,14 +89,14 @@ const Sidebar = ({ isOpen, onClose }) => {
 
   return (
     <>
-      {isOpen && <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden" onClick={onClose} />}
+      {isOpen && <div className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:hidden" onClick={onClose} />}
       <motion.aside
         variants={sidebarVariants}
         initial="closed"
         animate={isOpen ? "open" : "closed"}
         className={`fixed top-16 left-0 bottom-0 w-72 ${isDark ? 'glass-card-dark' : 'glass-card-light'} border-r z-50 flex flex-col`}
       >
-        <div className="p-4 flex-1 overflow-y-auto">
+        <div className="flex-1 p-4 overflow-y-auto">
           {/* User Info */}
           <div className={`mb-6 p-4 rounded-xl ${isDark ? 'bg-black/20' : 'bg-gray-100/50'}`}>
             <div className="flex items-center gap-3">
@@ -137,7 +139,7 @@ const Sidebar = ({ isOpen, onClose }) => {
         <div className="p-4">
           <motion.button onClick={handleLogout} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl ${isDark ? 'bg-gray-800 hover:bg-red-900/20' : 'bg-gray-100 hover:bg-red-50'} text-red-500 transition-colors duration-200`}>
             <LogOut className="w-5 h-5" />
-            <span className="font-medium text-sm">Logout</span>
+            <span className="text-sm font-medium">Logout</span>
           </motion.button>
         </div>
       </motion.aside>

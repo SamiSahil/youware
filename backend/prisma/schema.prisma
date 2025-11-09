@@ -17,6 +17,9 @@ enum Role {
   teacher
   student
   accountant
+  clerk      
+  librarian  
+  staff      
 }
 
 enum AttendanceStatus {

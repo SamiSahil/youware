@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
@@ -9,6 +11,7 @@ import Register from './pages/auth/Register';
 
 // Admin Pages
 import AdminDashboard from './pages/admin/AdminDashboard';
+import ManageStaff from './pages/admin/ManageStaff'; // <-- 1. Import the new page
 import ManageTeachers from './pages/admin/ManageTeachers';
 import ManageStudents from './pages/admin/ManageStudents';
 import NoticeBoard from './pages/admin/NoticeBoard';
@@ -47,8 +50,8 @@ function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-gray-900">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-gray-900">
+        <div className="w-12 h-12 border-b-2 border-blue-600 rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -61,6 +64,7 @@ function App() {
       
       {/* Admin Routes */}
       <Route path="/admin/dashboard" element={<ProtectedRoute allowedRoles={['admin']}><AdminDashboard /></ProtectedRoute>} />
+      <Route path="/admin/staff" element={<ProtectedRoute allowedRoles={['admin']}><ManageStaff /></ProtectedRoute>} /> 
       <Route path="/admin/teachers" element={<ProtectedRoute allowedRoles={['admin']}><ManageTeachers /></ProtectedRoute>} />
       <Route path="/admin/students" element={<ProtectedRoute allowedRoles={['admin']}><ManageStudents /></ProtectedRoute>} />
       <Route path="/admin/noticeboard" element={<ProtectedRoute allowedRoles={['admin']}><NoticeBoard /></ProtectedRoute>} />
@@ -112,13 +116,13 @@ function App() {
 
       {/* Catch-all Route for 404 */}
       <Route path="*" element={
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-gray-900">
-          <div className="text-center p-8 bg-white/50 dark:bg-black/20 backdrop-blur-lg rounded-2xl shadow-lg">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">404</h1>
-            <p className="text-gray-600 dark:text-gray-300 mb-8">Page Not Found</p>
+        <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-gray-900">
+          <div className="p-8 text-center shadow-lg bg-white/50 dark:bg-black/20 backdrop-blur-lg rounded-2xl">
+            <h1 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">404</h1>
+            <p className="mb-8 text-gray-600 dark:text-gray-300">Page Not Found</p>
             <button
               onClick={() => window.history.back()}
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-6 py-2 text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700"
             >
               Go Back
             </button>
