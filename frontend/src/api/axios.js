@@ -1,8 +1,12 @@
 // src/api/axios.js
 import axios from 'axios';
 
-// Create a new instance of axios with a custom configuration
-const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api' ||'https://youware-gold.vercel.app/api';
+// This line is the key.
+// In production, it will use the Vercel variable.
+// In development (npm run dev), it will use localhost.
+const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+
+console.log('API Base URL:', baseURL); // <-- Add this for debugging!
 
 const apiClient = axios.create({
   baseURL: baseURL,
@@ -10,6 +14,7 @@ const apiClient = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
 
 // IMPORTANT: Interceptor to add the JWT token to every request if it exists
 apiClient.interceptors.request.use(

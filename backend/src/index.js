@@ -34,11 +34,24 @@ const PORT = process.env.PORT || 5000;
 // 1. Enable CORS (Cross-Origin Resource Sharing)
 // In production, you should restrict this to your frontend's domain for security.
 // Example: app.use(cors({ origin: 'https://yourapp.com' }));
-app.use(cors());
-const allowedOrigins = process.env.NODE_ENV === 'production' 
-    ? 'https://marvelous-buttercream-4e7da3.netlify.app' // <-- REPLACE WITH YOUR FRONTEND URL
-    : 'http://localhost:5173'; // Or whatever your local dev port is
-app.use(cors({ origin: allowedOrigins }));
+const whitelist = [
+    'http://localhost:5173', // Your frontend development URL
+    'https://marvelous-buttercream-4e7da3.netlify.app' // Your frontend PRODUCTION URL
+];
+
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (!origin || whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 
 // 2. Set security-related HTTP headers
 app.use(helmet());
@@ -82,9 +95,9 @@ app.use('/api/settings', settingsRoutes);
 // --- Global Error Handling ---
 // This MUST be the last middleware in the chain.
 app.use(errorHandler);
-/*
+
 // --- Start the Server ---
 app.listen(PORT, () => {
     console.log(`🚀 Server is running on http://localhost:${PORT}`);
-});  */
+});  
 module.exports = app;
